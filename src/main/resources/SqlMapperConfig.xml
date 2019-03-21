@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--引入连接池的配置信息-->
+    <properties resource="druid.properties"></properties>
+    <!--给该包下所有的类注册别名,并不区分大小写-->
+    <settings>
+        <!--开启二级缓存,没必要开启自带mybaits自带的缓存,一般是将redis作为缓存集成到mybatis中-->
+        <setting name="cacheEnabled" value="true"/>
+        <!--开启延迟加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+    </settings>
+    <typeAliases>
+        <package name="bill.shawn.dao"></package>
+    </typeAliases>
+    <environments default="mysql">
+        <environment id="mysql">
+            <!--配置事务类型-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--定义连接池参数-->
+            <dataSource type="POOLED">
+              <property name="driver" value="${driver}"></property>
+              <property name="url" value="${url}"></property>
+              <property name="username" value="${username}"></property>
+              <property name="password" value="${password}"></property>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!-- package与mapper对比 -->
+        <package name="bill.shawn.dao"/>
+        <!--<mapper resource="bill/shawn/dao/IUserDao.xml"></mapper>-->
+        <!--<mapper class="bill.shawn.dao.IUserDao"></mapper>-->
+    </mappers>
+</configuration>
